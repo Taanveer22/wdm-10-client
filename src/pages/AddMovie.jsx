@@ -7,7 +7,7 @@ const AddMovie = () => {
   const handleRatingValue = (rate) => {
     setRating(rate);
   };
-  const handleAddMovieForm = (e) => {
+  const handleAddMovieForm = async (e) => {
     e.preventDefault();
     const poster = e.target.poster.value;
     const title = e.target.title.value;
@@ -27,8 +27,21 @@ const AddMovie = () => {
       summary,
     };
     console.log(movieInfo);
+    // send movie data to server
+    const res = await fetch(`http://localhost:5000/movies`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(movieInfo),
+    });
+    const data = await res.json();
+    console.log(data);
+    if (data.insertedId) {
+      alert("movie added to db");
+    }
   };
-  
+
   return (
     <div>
       <section className="w-11/12 mx-auto">
