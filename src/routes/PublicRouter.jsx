@@ -8,6 +8,7 @@ import MyFavorites from "../pages/MyFavorites";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import MovieCardDetails from "../components/MovieCardDetails";
+import PrivateRouter from "./PrivateRouter";
 
 const PublicRouter = createBrowserRouter([
   {
@@ -26,17 +27,29 @@ const PublicRouter = createBrowserRouter([
       },
       {
         path: "/movieCardDetails/:id",
-        element: <MovieCardDetails></MovieCardDetails>,
+        element: (
+          <PrivateRouter>
+            <MovieCardDetails></MovieCardDetails>
+          </PrivateRouter>
+        ),
         loader: ({ params }) =>
           fetch(`http://localhost:5000/movies/${params.id}`),
       },
       {
         path: "/addMovie",
-        element: <AddMovie></AddMovie>,
+        element: (
+          <PrivateRouter>
+            <AddMovie></AddMovie>
+          </PrivateRouter>
+        ),
       },
       {
         path: "/myFavorites",
-        element: <MyFavorites></MyFavorites>,
+        element: (
+          <PrivateRouter>
+            <MyFavorites></MyFavorites>
+          </PrivateRouter>
+        ),
       },
       {
         path: "/login",
