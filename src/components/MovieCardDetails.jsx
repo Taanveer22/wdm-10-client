@@ -6,19 +6,20 @@ import { AuthContext } from "../providers/AuthProvider";
 const MovieCardDetails = () => {
   const { user } = useContext(AuthContext);
   const loadedOneMovie = useLoaderData();
-  console.log(loadedOneMovie);
+  // console.log(loadedOneMovie);
   const navigate = useNavigate();
 
   const favoriteMovie = {
-    movieId: loadedOneMovie._id,
+    // send the user email who add to favorites list
+    email: user.email,
+    // ✅ send as _id (original movie id)
+    _id: loadedOneMovie._id,
     title: loadedOneMovie.title,
     poster: loadedOneMovie.poster,
     rating: loadedOneMovie.rating,
     genre: loadedOneMovie.genre,
     duration: loadedOneMovie.duration,
     release: loadedOneMovie.release,
-    // send the user email who add to favorites list
-    email: user.email,
   };
 
   const handleDeleteFromMovies = async (id) => {
@@ -43,9 +44,11 @@ const MovieCardDetails = () => {
     });
 
     const data = await res.json();
-    // console.log(data);
+    console.log(data);
     if (data.insertedId) {
       Swal.fire("Movie added to favorites");
+    } else if (data.message) {
+      Swal.fire(data.message);
     }
   };
 

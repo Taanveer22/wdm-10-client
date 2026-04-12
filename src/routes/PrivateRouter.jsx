@@ -9,7 +9,7 @@ const PrivateRouter = ({ children }) => {
   // console.log(location);
 
   if (loading) {
-    return Spinner;
+    return <Spinner />;
   }
 
   if (user) {

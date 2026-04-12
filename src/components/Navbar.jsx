@@ -60,7 +60,7 @@ const Navbar = () => {
               {links}
             </ul>
           </div>
-          <Link to="/" className="btn btn-ghost text-xl">
+          <Link to="/" className="btn btn-ghost text-xl hidden sm:flex">
             Orchid Movie Portal
           </Link>
         </div>
