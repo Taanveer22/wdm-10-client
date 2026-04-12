@@ -3,7 +3,8 @@ import MovieCard from "../components/MovieCard";
 
 const AllMovies = () => {
   const loadedAllMovies = useLoaderData();
-  console.log(loadedAllMovies);
+  // console.log(loadedAllMovies);
+  
   return (
     <div>
       <h1 className="text-center text-2xl font-semibold mb-4">

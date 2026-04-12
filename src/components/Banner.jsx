@@ -2,7 +2,6 @@
 import banner1 from "../assets/banner1.jpg";
 import banner2 from "../assets/banner2.jpg";
 import banner3 from "../assets/banner3.jpg";
-import banner4 from "../assets/banner4.jpg";
 
 // swiper import
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -33,17 +32,11 @@ const Banner = () => {
           style={{ width: "100%", height: "auto" }}
         />
       </SwiperSlide>
+
       <SwiperSlide>
         <img
           src={banner3}
           alt="banner3"
-          style={{ width: "100%", height: "auto" }}
-        />
-      </SwiperSlide>
-      <SwiperSlide>
-        <img
-          src={banner4}
-          alt="banner4"
           style={{ width: "100%", height: "auto" }}
         />
       </SwiperSlide>

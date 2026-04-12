@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Rating } from "react-simple-star-rating";
+import Swal from "sweetalert2";
 
 const AddMovie = () => {
   const [rating, setRating] = useState(0);
@@ -36,9 +37,9 @@ const AddMovie = () => {
       body: JSON.stringify(movieInfo),
     });
     const data = await res.json();
-    console.log(data);
+    // console.log(data);
     if (data.insertedId) {
-      alert("movie added to db");
+      Swal.fire("movie added to db");
     }
   };
 

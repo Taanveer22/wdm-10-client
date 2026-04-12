@@ -1,8 +1,22 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const MovieCardDetails = () => {
   const loadedOneMovie = useLoaderData();
-  console.log(loadedOneMovie);
+  // console.log(loadedOneMovie);
+  const navigate = useNavigate();
+
+  const handleDeleteFromMovies = async (id) => {
+    const res = await fetch(`http://localhost:5000/movies/${id}`, {
+      method: "DELETE",
+    });
+    const data = await res.json();
+    // console.log(data);
+    if (data.deletedCount > 0) {
+      Swal.fire("Movie deleted from db");
+      navigate("/allMovies");
+    }
+  };
 
   return (
     <div>
@@ -21,7 +35,12 @@ const MovieCardDetails = () => {
             <p>Rating : {loadedOneMovie?.rating}</p>
             <div className="flex items-center gap-6">
               <button className="btn btn-success">Add To Favorites</button>
-              <button className="btn btn-error">Delete From Movies</button>
+              <button
+                onClick={() => handleDeleteFromMovies(loadedOneMovie?._id)}
+                className="btn btn-error"
+              >
+                Delete From Movies
+              </button>
             </div>
           </div>
         </div>
