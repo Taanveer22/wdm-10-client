@@ -1,10 +1,10 @@
-import StaticSlider from "../components/StaticSlider";
+import Banner from "../components/Banner";
 import FeaturedMovies from "../components/FeaturedMovies";
 const Home = () => {
   return (
     <div>
-      <section>
-        <StaticSlider></StaticSlider>
+      <section className="mb-6 lg:mb-12">
+        <Banner></Banner>
       </section>
       <section>
         <FeaturedMovies></FeaturedMovies>
