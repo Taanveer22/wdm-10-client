@@ -1,10 +1,25 @@
+import { useContext } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { AuthContext } from "../providers/AuthProvider";
 
 const MovieCardDetails = () => {
+  const { user } = useContext(AuthContext);
   const loadedOneMovie = useLoaderData();
-  // console.log(loadedOneMovie);
+  console.log(loadedOneMovie);
   const navigate = useNavigate();
+
+  const favoriteMovie = {
+    movieId: loadedOneMovie._id,
+    title: loadedOneMovie.title,
+    poster: loadedOneMovie.poster,
+    rating: loadedOneMovie.rating,
+    genre: loadedOneMovie.genre,
+    duration: loadedOneMovie.duration,
+    release: loadedOneMovie.release,
+    // send the user email who add to favorites list
+    email: user.email,
+  };
 
   const handleDeleteFromMovies = async (id) => {
     const res = await fetch(`http://localhost:5000/movies/${id}`, {
@@ -15,6 +30,22 @@ const MovieCardDetails = () => {
     if (data.deletedCount > 0) {
       Swal.fire("Movie deleted from db");
       navigate("/allMovies");
+    }
+  };
+
+  const handleAddToFavorites = async () => {
+    const res = await fetch(`http://localhost:5000/favMovies`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(favoriteMovie),
+    });
+
+    const data = await res.json();
+    // console.log(data);
+    if (data.insertedId) {
+      Swal.fire("Movie added to favorites");
     }
   };
 
@@ -34,7 +65,12 @@ const MovieCardDetails = () => {
             <p>Genre : {loadedOneMovie?.genre}</p>
             <p>Rating : {loadedOneMovie?.rating}</p>
             <div className="flex items-center gap-6">
-              <button className="btn btn-success">Add To Favorites</button>
+              <button
+                onClick={() => handleAddToFavorites()}
+                className="btn btn-success"
+              >
+                Add To Favorites
+              </button>
               <button
                 onClick={() => handleDeleteFromMovies(loadedOneMovie?._id)}
                 className="btn btn-error"
