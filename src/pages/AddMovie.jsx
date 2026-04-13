@@ -31,7 +31,7 @@ const AddMovie = () => {
       rating,
       summary,
     };
-    console.log(movieInfo);
+    // console.log(movieInfo);
     // send movie data to server
     const res = await fetch(`http://localhost:5000/movies`, {
       method: "POST",
@@ -41,7 +41,7 @@ const AddMovie = () => {
       body: JSON.stringify(movieInfo),
     });
     const data = await res.json();
-    console.log(data);
+    // console.log(data);
     if (data.insertedId) {
       Swal.fire("movie added to db");
     }
