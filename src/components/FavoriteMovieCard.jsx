@@ -1,5 +1,5 @@
 const FavoriteMovieCard = ({ movieItem, handleDeleteFromFavorites }) => {
-  console.log(movieItem);
+  // console.log(movieItem);
   return (
     <div>
       <div className="card bg-gray-200 shadow-sm">
@@ -10,7 +10,7 @@ const FavoriteMovieCard = ({ movieItem, handleDeleteFromFavorites }) => {
             className="rounded-xl w-full h-40"
           />
         </figure>
-        <h2 className="card-title mx-auto"> {movieItem?.title}</h2>
+        <h2 className="text-lg font-medium px-5"> {movieItem?.title}</h2>
         <div className="card-body items-start">
           <p>{movieItem?.summary}</p>
           <p>Release Year : {movieItem?.release}</p>

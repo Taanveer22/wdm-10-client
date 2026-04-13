@@ -14,7 +14,7 @@ const MovieCard = ({ movieItem }) => {
         </figure>
         <div className="card-body items-center text-center">
           <h2 className="card-title"> {movieItem?.title}</h2>
-          <p>{movieItem?.summary}</p>
+          <p className="text-justify">{movieItem?.summary}</p>
           <div className="card-actions">
             <Link
               to={`/movieCardDetails/${movieItem?._id}`}

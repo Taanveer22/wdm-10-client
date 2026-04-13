@@ -1,13 +1,26 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import FavoriteMovieCard from "../components/FavoriteMovieCard";
+import Swal from "sweetalert2";
 
 const MyFavorites = () => {
   const { user } = useContext(AuthContext);
   const [favMovies, setfavMovies] = useState([]);
 
-  const handleDeleteFromFavorites = (id) => {
-    console.log(id);
+  const handleDeleteFromFavorites = async (id) => {
+    // console.log(id);
+    const res = await fetch(`http://localhost:5000/favMovies/${id}`, {
+      method: "DELETE",
+    });
+    const data = await res.json();
+    console.log(data);
+    if (data.deletedCount > 0) {
+      const remainingFavMovies = favMovies.filter(
+        (movieItem) => movieItem._id !== id,
+      );
+      setfavMovies(remainingFavMovies);
+      Swal.fire("Movie deleted from favorites");
+    }
   };
 
   useEffect(() => {
