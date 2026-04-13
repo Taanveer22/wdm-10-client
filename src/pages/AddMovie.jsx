@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Rating } from "react-simple-star-rating";
 import Swal from "sweetalert2";
+import { AuthContext } from "../providers/AuthProvider";
 
 const AddMovie = () => {
+  const { user } = useContext(AuthContext);
   const [rating, setRating] = useState(0);
   // Catch Rating value
   const handleRatingValue = (rate) => {
@@ -19,6 +21,8 @@ const AddMovie = () => {
     const summary = e.target.summary.value;
 
     const movieInfo = {
+      // send the user email who add this movie
+      email: user?.email,
       poster,
       title,
       genre,
@@ -37,7 +41,7 @@ const AddMovie = () => {
       body: JSON.stringify(movieInfo),
     });
     const data = await res.json();
-    // console.log(data);
+    console.log(data);
     if (data.insertedId) {
       Swal.fire("movie added to db");
     }

@@ -2,13 +2,14 @@ import { createBrowserRouter } from "react-router-dom";
 import RootLayout from "../layouts/RootLayout";
 import NotFound from "../pages/NotFound";
 import Home from "../pages/Home";
-import AllMovies from "../pages/AllMovies";
 import AddMovie from "../pages/AddMovie";
 import MyFavorites from "../pages/MyFavorites";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import MovieCardDetails from "../components/MovieCardDetails";
 import PrivateRouter from "./PrivateRouter";
+import MyMovies from "../pages/MyMovies";
+import AllUsersMovies from "../pages/AllUsersMovies";
 
 const PublicRouter = createBrowserRouter([
   {
@@ -21,9 +22,13 @@ const PublicRouter = createBrowserRouter([
         element: <Home></Home>,
       },
       {
-        path: "/allMovies",
-        element: <AllMovies></AllMovies>,
+        path: "/allUsersMovies",
+        element: <AllUsersMovies></AllUsersMovies>,
         loader: () => fetch(`http://localhost:5000/movies`),
+      },
+      {
+        path: "/myMovies",
+        element: <MyMovies></MyMovies>,
       },
       {
         path: "/movieCardDetails/:id",

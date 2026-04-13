@@ -7,7 +7,7 @@ import {
   signInWithPopup,
   signOut,
 } from "firebase/auth";
-import auth from "../firebase/firebase.config";
+import auth from "../utilities/firebase.config";
 
 const AuthContext = createContext(null);
 

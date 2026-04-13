@@ -1,4 +1,5 @@
 const FavoriteMovieCard = ({ movieItem, handleDeleteFromFavorites }) => {
+  console.log(movieItem);
   return (
     <div>
       <div className="card bg-gray-200 shadow-sm">

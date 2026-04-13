@@ -21,11 +21,15 @@ const Navbar = () => {
         <NavLink to="/">Home</NavLink>
       </li>
       <li>
-        <NavLink to="/allMovies">All Movies</NavLink>
-      </li>
-      <li>
         <NavLink to="/addMovie">Add Movie</NavLink>
       </li>
+      <li>
+        <NavLink to="/allUsersMovies">All Users Movies</NavLink>
+      </li>
+      <li>
+        <NavLink to="/myMovies">My Movies</NavLink>
+      </li>
+
       <li>
         <NavLink to="/myFavorites">My Favorites</NavLink>
       </li>

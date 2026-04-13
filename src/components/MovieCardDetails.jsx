@@ -11,15 +11,15 @@ const MovieCardDetails = () => {
 
   const favoriteMovie = {
     // send the user email who add to favorites list
-    email: user.email,
-    // ✅ send as _id (original movie id)
-    _id: loadedOneMovie._id,
-    title: loadedOneMovie.title,
-    poster: loadedOneMovie.poster,
-    rating: loadedOneMovie.rating,
-    genre: loadedOneMovie.genre,
-    duration: loadedOneMovie.duration,
-    release: loadedOneMovie.release,
+    email: user?.email,
+    // ✅ send as movieId (original _id)
+    movieId: loadedOneMovie?._id,
+    title: loadedOneMovie?.title,
+    poster: loadedOneMovie?.poster,
+    rating: loadedOneMovie?.rating,
+    genre: loadedOneMovie?.genre,
+    duration: loadedOneMovie?.duration,
+    release: loadedOneMovie?.release,
   };
 
   const handleDeleteFromMovies = async (id) => {
@@ -30,7 +30,7 @@ const MovieCardDetails = () => {
     // console.log(data);
     if (data.deletedCount > 0) {
       Swal.fire("Movie deleted from db");
-      navigate("/allMovies");
+      navigate("/allUsersMovies");
     }
   };
 
