@@ -14,11 +14,11 @@ const Login = () => {
     const password = e.target.password.value;
     loginUser(email, password)
       .then((result) => {
-        console.log(result.user);
+        alert(result.user);
         navigate(from);
       })
       .catch((error) => {
-        console.log(error.message);
+        alert(error.message);
       });
   };
 

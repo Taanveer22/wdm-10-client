@@ -6,6 +6,7 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  updateProfile,
 } from "firebase/auth";
 import auth from "../utilities/firebase.config";
 
@@ -19,26 +20,30 @@ const AuthProvider = ({ children }) => {
 
   // google sign in function
   const signInWithGoogle = () => {
-    setLoading(false);
     return signInWithPopup(auth, provider);
   };
 
   // Register function
   const registerUser = (email, password) => {
-    setLoading(false);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
   // Login function
   const loginUser = (email, password) => {
-    setLoading(false);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
   // Logout function
   const logoutUser = () => {
-    setLoading(false);
     return signOut(auth);
+  };
+
+  // update profile function
+  const updateUserProfile = (name, photo) => {
+    return updateProfile(auth.currentUser, {
+      displayName: name,
+      photoURL: photo,
+    });
   };
 
   // Listen to auth state changes
@@ -46,13 +51,10 @@ const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       setLoading(false);
-
-      // console.log("User changed:", user);
-      // console.log("Loading state:", loading);
     });
 
     return unsubscribe;
-  }, [user, loading]);
+  }, []);
 
   // Values to share via context
   const authInfo = {
@@ -62,6 +64,7 @@ const AuthProvider = ({ children }) => {
     loginUser,
     logoutUser,
     signInWithGoogle,
+    updateUserProfile,
   };
 
   return (

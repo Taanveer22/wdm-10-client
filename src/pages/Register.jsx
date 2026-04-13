@@ -3,7 +3,7 @@ import { AuthContext } from "../providers/AuthProvider";
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
-  const { registerUser } = useContext(AuthContext);
+  const { registerUser, updateUserProfile } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleRegisterForm = (e) => {
@@ -13,16 +13,18 @@ const Register = () => {
     const password = e.target.password.value;
     const name = e.target.name.value;
     const photo = e.target.photo.value;
-    console.log(name, photo, email, password);
+    // console.log(name, photo, email, password);
 
     // backend register
     registerUser(email, password)
-      .then((result) => {
-        console.log(result.user);
+      .then(() => {
+        return updateUserProfile(name, photo);
+      })
+      .then(() => {
         navigate("/");
       })
       .catch((error) => {
-        console.log(error.message);
+        alert(error.message);
       });
   };
 
