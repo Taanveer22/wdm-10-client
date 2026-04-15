@@ -9,19 +9,6 @@ const MovieCardDetails = () => {
   // console.log(loadedOneMovie);
   const navigate = useNavigate();
 
-  const favoriteMovie = {
-    // send the user email who add to favorites list
-    email: user?.email,
-    // ✅ send as movieId (original _id)
-    movieId: loadedOneMovie?._id,
-    title: loadedOneMovie?.title,
-    poster: loadedOneMovie?.poster,
-    rating: loadedOneMovie?.rating,
-    genre: loadedOneMovie?.genre,
-    duration: loadedOneMovie?.duration,
-    release: loadedOneMovie?.release,
-  };
-
   const handleDeleteFromMovies = async (id) => {
     const res = await fetch(`http://localhost:5000/movies/${id}`, {
       method: "DELETE",
@@ -35,12 +22,26 @@ const MovieCardDetails = () => {
   };
 
   const handleAddToFavorites = async () => {
+    console.log("Current user email:", user?.email); // ← add this
+    // Build the object inside event handler, not outside
+    const favoriteMovieInfo = {
+      // send the user email who add to favorites list
+      email: user?.email,
+      // ✅ send as movieId (original _id)
+      movieId: loadedOneMovie?._id,
+      title: loadedOneMovie?.title,
+      poster: loadedOneMovie?.poster,
+      rating: loadedOneMovie?.rating,
+      genre: loadedOneMovie?.genre,
+      duration: loadedOneMovie?.duration,
+      release: loadedOneMovie?.release,
+    };
     const res = await fetch(`http://localhost:5000/favMovies`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(favoriteMovie),
+      body: JSON.stringify(favoriteMovieInfo),
     });
 
     const data = await res.json();

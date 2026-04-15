@@ -10,13 +10,19 @@ import {
 } from "firebase/auth";
 import auth from "../utilities/firebase.config";
 
+// google provider outside component
+const provider = new GoogleAuthProvider();
+provider.addScope("email");
+provider.addScope("profile");
+provider.setCustomParameters({ prompt: "select_account" });
+
+// context creation outside component
 const AuthContext = createContext(null);
 
+// =================== COMPONENT START HERE =========================
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-
-  const provider = new GoogleAuthProvider();
 
   // google sign in function
   const signInWithGoogle = () => {
@@ -49,6 +55,14 @@ const AuthProvider = ({ children }) => {
   // Listen to auth state changes
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      // console.log("Full user object:", currentUser);
+      if (currentUser) {
+        // if email is null, get it from providerData
+        const resolvedEmail =
+          currentUser?.email || currentUser?.providerData[0]?.email;
+        // Attach it directly to the user object
+        currentUser.email = resolvedEmail;
+      }
       setUser(currentUser);
       setLoading(false);
     });
