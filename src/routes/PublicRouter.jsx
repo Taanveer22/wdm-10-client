@@ -24,7 +24,6 @@ const PublicRouter = createBrowserRouter([
       {
         path: "/allUsersMovies",
         element: <AllUsersMovies></AllUsersMovies>,
-        loader: () => fetch(`http://localhost:5000/movies`),
       },
       {
         path: "/myMovies",
