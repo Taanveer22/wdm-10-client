@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Register = () => {
   const { registerUser, updateUserProfile } = useContext(AuthContext);
@@ -14,6 +15,23 @@ const Register = () => {
     const name = e.target.name.value;
     const photo = e.target.photo.value;
     // console.log(name, photo, email, password);
+
+    if (password.length < 6) {
+      Swal.fire("Password must be more than 6 characters");
+      return;
+    }
+
+    const hasUppercase = /[A-Z]/;
+    if (!hasUppercase.test(password)) {
+      Swal.fire("Password must be contain an uppercase letter");
+      return;
+    }
+
+    const hasLowercase = /[a-z]/;
+    if (!hasLowercase.test(password)) {
+      Swal.fire("Password must be contain a lowercase letter");
+      return;
+    }
 
     // backend register
     registerUser(email, password)

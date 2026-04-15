@@ -2,6 +2,7 @@ import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import { useContext } from "react";
 import orchid from "../assets/orchid.svg";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
   const { user, logoutUser } = useContext(AuthContext);
@@ -9,10 +10,10 @@ const Navbar = () => {
   const handleLogoutUser = () => {
     logoutUser()
       .then(() => {
-        console.log("log out done");
+        Swal.fire("log out done");
       })
       .catch(() => {
-        console.log("log out failed");
+        Swal.fire("log out failed");
       });
   };
 

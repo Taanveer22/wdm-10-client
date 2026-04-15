@@ -20,7 +20,7 @@ const MovieCard = ({ movieItem }) => {
         <div className="card-actions justify-center items-center">
           <Link
             to={`/movieCardDetails/${movieItem?._id}`}
-            className="btn btn-info"
+            className="btn btn-sm btn-info"
           >
             See Details
           </Link>

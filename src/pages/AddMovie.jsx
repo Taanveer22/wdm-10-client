@@ -33,7 +33,7 @@ const AddMovie = () => {
     };
     // console.log(movieInfo);
     // send movie data to server
-    const res = await fetch(`http://localhost:5000/movies`, {
+    const res = await fetch(`https://wdm-10-server.vercel.app/movies`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -43,7 +43,7 @@ const AddMovie = () => {
     const data = await res.json();
     // console.log(data);
     if (data.insertedId) {
-      Swal.fire("movie added to db");
+      Swal.fire("Movie added to database");
     }
   };
 

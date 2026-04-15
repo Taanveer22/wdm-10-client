@@ -25,11 +25,11 @@ const Login = () => {
   const handleGoogleLogin = () => {
     signInWithGoogle()
       .then((result) => {
-        console.log(result.user);
+        alert(result.user);
         navigate(from);
       })
       .catch((error) => {
-        console.log(error.message);
+        alert(error.message);
       });
   };
 

@@ -10,6 +10,7 @@ import MovieCardDetails from "../components/MovieCardDetails";
 import PrivateRouter from "./PrivateRouter";
 import MyMovies from "../pages/MyMovies";
 import AllUsersMovies from "../pages/AllUsersMovies";
+import Spinner from "../components/Spinner";
 
 const PublicRouter = createBrowserRouter([
   {
@@ -36,8 +37,9 @@ const PublicRouter = createBrowserRouter([
             <MovieCardDetails></MovieCardDetails>
           </PrivateRouter>
         ),
+        hydrateFallbackElement: <Spinner></Spinner>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/movies/${params.id}`),
+          fetch(`https://wdm-10-server.vercel.app/movies/${params.id}`),
       },
       {
         path: "/addMovie",

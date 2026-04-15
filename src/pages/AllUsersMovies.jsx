@@ -6,7 +6,7 @@ const AllUsersMovies = () => {
   const [searchField, setSearchField] = useState("");
 
   useEffect(() => {
-    fetch(`http://localhost:5000/movies?search=${searchField}`)
+    fetch(`https://wdm-10-server.vercel.app/movies?search=${searchField}`)
       .then((res) => res.json())
       .then((data) => setAllMovies(data));
   }, [searchField]);

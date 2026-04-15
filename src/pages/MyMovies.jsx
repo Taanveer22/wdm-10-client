@@ -10,7 +10,7 @@ const MyMovies = () => {
     if (!user?.email) {
       return;
     }
-    fetch(`http://localhost:5000/movies?email=${user?.email}`)
+    fetch(`https://wdm-10-server.vercel.app/movies?email=${user?.email}`)
       .then((res) => res.json())
       .then((data) => setIndividualMovies(data));
   }, [user?.email]);

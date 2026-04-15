@@ -5,7 +5,7 @@ const FeaturedMovies = () => {
   const [featMovies, setFeatMovies] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/movies/featured`)
+    fetch(`https://wdm-10-server.vercel.app/movies/featured`)
       .then((res) => res.json())
       .then((data) => setFeatMovies(data));
   }, []);

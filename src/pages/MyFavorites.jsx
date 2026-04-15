@@ -9,11 +9,14 @@ const MyFavorites = () => {
 
   const handleDeleteFromFavorites = async (id) => {
     // console.log(id);
-    const res = await fetch(`http://localhost:5000/favMovies/${id}`, {
-      method: "DELETE",
-    });
+    const res = await fetch(
+      `https://wdm-10-server.vercel.app/favMovies/${id}`,
+      {
+        method: "DELETE",
+      },
+    );
     const data = await res.json();
-    console.log(data);
+    // console.log(data);
     if (data.deletedCount > 0) {
       const remainingFavMovies = favMovies.filter(
         (movieItem) => movieItem._id !== id,
@@ -27,7 +30,7 @@ const MyFavorites = () => {
     if (!user?.email) {
       return;
     }
-    fetch(`http://localhost:5000/favMovies?email=${user?.email}`)
+    fetch(`https://wdm-10-server.vercel.app/favMovies?email=${user?.email}`)
       .then((res) => res.json())
       .then((data) => setfavMovies(data));
   }, [user?.email]);
